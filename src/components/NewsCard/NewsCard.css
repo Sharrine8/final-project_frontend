@@ -1,0 +1,110 @@
+.news-card {
+  max-width: 400px;
+  height: 576px;
+  border-radius: 10px;
+  background-color: #fff;
+  position: relative;
+}
+
+.news-card__img {
+  max-width: 400px;
+  height: 272px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+}
+
+.news-card__info {
+  padding: 24px;
+}
+
+.news-card__date {
+  color: #b6bcbf;
+  font-family: "SourceSans-Regular", Arial, sans-serif;
+  padding: 0 0 10px;
+  margin: 0;
+}
+
+.news-card__title {
+  text-decoration: none;
+  color: #000;
+  font-family: "RobotoSlab-Regular", Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.news-card__description {
+  font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  max-width: 352px;
+  max-height: 88px;
+  margin: 0;
+  padding: 8px 0 0;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  font-weight: 400;
+}
+
+.news-card__source {
+  text-transform: uppercase;
+  color: #b6bcbf;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  margin: 0;
+  font-family: "RobotoSlab-Bold", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.news-card__category {
+  background-color: #fff;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  padding: 8px 22px;
+  border-radius: 10px;
+  margin: 0;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.news-card__btn {
+  padding: 8px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border-radius: 10px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: none;
+}
+
+.news-card__delete {
+  background: #fff url("../../assets/trash.png") center no-repeat;
+}
+
+.news-card__delete:hover {
+  background-image: url("../../assets/trash-hover.png");
+}
+
+.news-card__bookmark {
+  background: #fff url("../../assets/bookmark.png") center no-repeat;
+}
+
+.news-card__bookmark:hover {
+  background-image: url("../../assets/bookmark-hover.png");
+}

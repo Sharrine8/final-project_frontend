@@ -1,0 +1,41 @@
+.about {
+  padding: 80px 104px;
+  gap: 46px;
+  display: grid;
+  grid-template-columns: minmax(200px, 464px) 1fr;
+}
+
+.about__img {
+  max-width: 464px;
+  max-height: 464px;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  align-items: center;
+}
+
+.about__title {
+  font-size: 40px;
+  font-family: "RobotoSlab-Regular", Arial, sans-serif;
+  font-weight: 400;
+}
+
+.about__text {
+  font-size: 18px;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@media (max-width: 768px) {
+  .about {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    text-align: center;
+  }
+
+  .about__img {
+    margin: 0 auto;
+  }
+}

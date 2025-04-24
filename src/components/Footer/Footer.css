@@ -1,0 +1,54 @@
+.footer {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 104px;
+}
+
+.footer__info {
+  color: #b6bcbf;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  font-weight: 400;
+}
+
+.footer__links {
+  display: flex;
+  gap: 40px;
+}
+
+.footer__link {
+  text-decoration: none;
+  cursor: pointer;
+  color: #1a1b22;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.footer__weblinks {
+  display: flex;
+  gap: 24px;
+}
+
+.footer__weblink {
+  text-decoration: none;
+  cursor: button;
+}
+
+.footer__weblink_btn {
+  height: 24px;
+  width: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.footer__github {
+  background: transparent url("../../assets/github-logo.png") center no-repeat;
+  background-size: cover;
+}
+
+.footer__linkedin {
+  background: transparent url("../../assets/linkedin-logo.svg") center no-repeat;
+  background-size: cover;
+}

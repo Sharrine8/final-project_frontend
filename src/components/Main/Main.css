@@ -1,0 +1,15 @@
+.main {
+  background: #f5f6f7;
+  margin: 0;
+}
+
+.main__card-list {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  padding: 62px 0;
+}
