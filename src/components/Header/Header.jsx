@@ -9,11 +9,13 @@ function Header({
   searchTerm,
   setSearchTerm,
   handleSearch,
+  openLoginModal,
 }) {
   const { pathname } = useLocation();
+
   return (
     <header className={`header ${isSavedNews ? "" : "header__home"}`}>
-      <Navigation isLoggedIn={isLoggedIn} />
+      <Navigation isLoggedIn={isLoggedIn} openLoginModal={openLoginModal} />
       {isSavedNews ? (
         <section className="header__container header__container_saved-news">
           <h2 className="header__saved-news-title">Saved articles</h2>

@@ -67,6 +67,12 @@
   justify-content: center;
 }
 
+.nav__btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(93, 94, 95, 0.6);
+  border: 1px solid #fff;
+}
+
 .nav__btn_logged-in_black {
   border: 1px solid #000;
   color: #000;

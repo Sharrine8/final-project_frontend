@@ -3,7 +3,7 @@ import logout_black from "../../assets/logout-black.svg";
 import logout_white from "../../assets/logout-white.svg";
 import "./Navigation.css";
 
-function Navigation({ isLoggedIn }) {
+function Navigation({ isLoggedIn, openLoginModal }) {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
   return (
@@ -65,7 +65,13 @@ function Navigation({ isLoggedIn }) {
             </Link>
           </li>
           <li className="nav__li">
-            <button className="nav__link nav__btn">Sign in</button>
+            <button
+              className="nav__link nav__btn"
+              type="button"
+              onClick={openLoginModal}
+            >
+              Sign in
+            </button>
           </li>
         </ul>
       )}

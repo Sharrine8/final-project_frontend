@@ -81,24 +81,50 @@
   font-weight: 500;
 }
 
-.news-card__btn {
-  padding: 8px;
+.news-card__btn-container {
   position: absolute;
   top: 24px;
   right: 24px;
+  display: inline-flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.news-card__btn {
+  padding: 8px;
   border-radius: 10px;
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   border: none;
 }
 
-.news-card__delete {
-  background: #fff url("../../assets/trash.png") center no-repeat;
+.news-card__bookmark-overlay {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%) translateX(-190px);
+  background-color: #fff;
+  height: 40px;
+  width: 182px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
 }
 
-.news-card__delete:hover {
-  background-image: url("../../assets/trash-hover.png");
+.news-card__btn-container:hover .news-card__bookmark-overlay {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-226px);
 }
 
 .news-card__bookmark {
@@ -107,4 +133,12 @@
 
 .news-card__bookmark:hover {
   background-image: url("../../assets/bookmark-hover.png");
+}
+
+.news-card__delete {
+  background: #fff url("../../assets/trash.png") center no-repeat;
+}
+
+.news-card__delete:hover {
+  background-image: url("../../assets/trash-hover.png");
 }

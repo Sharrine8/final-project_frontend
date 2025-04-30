@@ -8,11 +8,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* visibility: hidden; */
+  visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .modal_opened {
+  opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .modal__content {

@@ -2,14 +2,15 @@ import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import About from "../About/About";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 import { useState, useEffect } from "react";
 import { getEverything } from "../../utils/api";
 import "./App.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   //Location
   const { pathname } = useLocation();
   const isSavedNews = pathname === "/saved-news";
@@ -28,6 +29,21 @@ function App() {
     setActiveModal("register");
   };
 
+  const openLoginModal = () => {
+    setActiveModal("login");
+  };
+
+  const switchRegisterModal = () => {
+    closeActiveModal();
+    setActiveModal("login");
+  };
+
+  const switchLoginModal = () => {
+    closeActiveModal();
+    setActiveModal("register");
+  };
+
+  //Search Form API
   const handleSearch = async (e) => {
     e.preventDefault();
     if (searchTerm.trim() === "") {
@@ -35,11 +51,13 @@ function App() {
       return;
     }
     try {
+      setIsLoading(true);
       const data = await getEverything(searchTerm);
-      console.log("Fetched articles:", data);
       setArticles(data.articles);
     } catch (err) {
       console.error("Failed to fetch articles");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -62,6 +80,7 @@ function App() {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           handleSearch={handleSearch}
+          openLoginModal={openLoginModal}
         />
         <Routes>
           <Route
@@ -73,6 +92,7 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   articles={articles}
                   searchTerm={searchTerm}
+                  isLoading={isLoading}
                 />
               </>
             }
@@ -86,6 +106,7 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   articles={articles}
                   searchTerm={searchTerm}
+                  isLoading={isLoading}
                 />
               ) : (
                 <Navigate to="/" />
@@ -93,12 +114,17 @@ function App() {
             }
           />
         </Routes>
-        <About />
         <Footer />
       </div>
       <RegisterModal
         closeActiveModal={closeActiveModal}
         isOpen={activeModal === "register"}
+        switchRegisterModal={switchRegisterModal}
+      />
+      <LoginModal
+        closeActiveModal={closeActiveModal}
+        isOpen={activeModal === "login"}
+        switchLoginModal={switchLoginModal}
       />
     </div>
   );

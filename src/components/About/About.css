@@ -3,6 +3,7 @@
   gap: 46px;
   display: grid;
   grid-template-columns: minmax(200px, 464px) 1fr;
+  background-color: #fff;
 }
 
 .about__img {

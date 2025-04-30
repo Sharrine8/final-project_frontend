@@ -1,14 +1,21 @@
 import NewsCard from "../NewsCard/NewsCard";
 import "./NewsCardList.css";
 
-function NewsCardList({ isSavedNews, isLoggedIn, articles, searchTerm }) {
+function NewsCardList({
+  isSavedNews,
+  isLoggedIn,
+  articles,
+  searchTerm,
+  handleShowMore,
+  articlesToShow,
+}) {
   return (
     <section className="cards">
       {isSavedNews ? (
         <p>Saved News Page</p>
       ) : (
         <ul className="cards__list">
-          {articles.map((article, index) => {
+          {articles.slice(0, articlesToShow).map((article, index) => {
             return (
               <NewsCard
                 key={index}
@@ -20,6 +27,11 @@ function NewsCardList({ isSavedNews, isLoggedIn, articles, searchTerm }) {
             );
           })}
         </ul>
+      )}
+      {articlesToShow < articles.length && (
+        <button className="cards__show-more-btn" onClick={handleShowMore}>
+          Show more
+        </button>
       )}
     </section>
   );

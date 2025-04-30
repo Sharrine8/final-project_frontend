@@ -1,0 +1,45 @@
+.preloader {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 280px;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.preloader__circle {
+  position: relative;
+  background: conic-gradient(#1a1b22, transparent);
+  height: 74px;
+  width: 74px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: load 2s linear infinite;
+}
+
+.preloader__circle::before {
+  content: "";
+  position: absolute;
+  width: 73px;
+  height: 73px;
+  border-radius: 50%;
+  background-color: #f5f6f7;
+}
+
+@keyframes load {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.preloader__text {
+  font-family: "RobotoRegular", Arial, sans-serif;
+  font-size: 18px;
+  color: rgb(182, 188, 191);
+  font-weight: 400;
+}

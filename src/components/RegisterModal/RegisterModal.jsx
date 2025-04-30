@@ -1,11 +1,14 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ closeActiveModal, isOpen }) {
+function RegisterModal({ closeActiveModal, isOpen, switchRegisterModal }) {
   return (
     <ModalWithForm
       title="Sign up"
       closeActiveModal={closeActiveModal}
       isOpen={isOpen}
+      switchModal={switchRegisterModal}
+      switchText={"or Sign in"}
+      buttonText={"Sign up"}
     >
       <label htmlFor="email" className="modal__label">
         Email{" "}

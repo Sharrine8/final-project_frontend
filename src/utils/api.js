@@ -28,3 +28,21 @@ export function getEverything(query = "technology") {
     headers: headers,
   });
 }
+
+function generateIdFromUrl(url) {
+  return btoa(url);
+}
+
+export function saveArticle(article) {
+  return new Promise((resolve, reject) => {
+    resolve({
+      _id: generateIdFromUrl(article.url).toString(),
+      url: article.url,
+      title: article.title,
+      description: article.description,
+      urlToImage: article.urlToImage,
+      source: article.source.name,
+      publishedAt: article.publishedAt,
+    });
+  });
+}

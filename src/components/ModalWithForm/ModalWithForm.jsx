@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ModalWithForm.css";
 
-function ModalWithForm({ children, title, closeActiveModal }) {
+function ModalWithForm({
+  children,
+  title,
+  closeActiveModal,
+  isOpen,
+  switchModal,
+  switchText,
+  buttonText,
+}) {
+  useEffect(() => {
+    const handleEscapeKey = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+    if (isOpen) {
+      window.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isOpen, closeActiveModal]);
+
+  const handleClickOutside = (e) => {
+    if (e.target.classList.contains("modal")) {
+      closeActiveModal();
+    }
+  };
+
   return (
-    <div className={`modal ${isOpen === isOpen ? "modal_opened" : ""}`}>
+    <div
+      className={`modal ${isOpen ? "modal_opened" : ""}`}
+      onClick={handleClickOutside}
+    >
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
         <button
@@ -18,10 +50,14 @@ function ModalWithForm({ children, title, closeActiveModal }) {
           {children}
           <div className="modal__form-btns">
             <button type="button" className="modal__submit">
-              Sign Up
+              {buttonText}
             </button>
-            <button type="button" className="modal__switch-btn">
-              Switch button
+            <button
+              type="button"
+              className="modal__switch-btn"
+              onClick={switchModal}
+            >
+              {switchText}
             </button>
           </div>
         </form>
