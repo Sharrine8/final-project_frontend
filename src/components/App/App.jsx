@@ -6,10 +6,10 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import { useState, useEffect } from "react";
 import { getEverything } from "../../utils/api";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./App.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   //Location
   const { pathname } = useLocation();
@@ -18,6 +18,56 @@ function App() {
   //API states
   const [searchTerm, setSearchTerm] = useState("");
   const [articles, setArticles] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  //User Info
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem("isLoggedIn") === "true";
+  });
+  const [error, setError] = useState("");
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    email: "",
+  });
+
+  //Register
+
+  const onRegister = ({ email, password, name }) => {
+    // if (!currentUser.name || !currentUser.email || !password) {
+    //   setError("All fields are required.");
+    //   return;
+    // }
+    console.log(email, name);
+
+    localStorage.setItem("user", JSON.stringify({ email, password, name }));
+    closeActiveModal();
+    // setError("");
+  };
+
+  //Login/Logout
+  const handleLogin = ({ email, password }) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (email === user.email && password === user.password) {
+      setCurrentUser({ name: user.name, email: user.email });
+      setIsLoggedIn(true);
+      closeActiveModal();
+    } else {
+      setError("Invalid email or password.");
+      console.log("Wrong email or password");
+    }
+    return;
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setCurrentUser({ password: "", name: "", email: "" });
+    setIsLoggedIn(false);
+    closeActiveModal();
+  };
+
+  // const handleLoginSubmit = ({ email, password }) => {
+  //   handleLogin({ email, password });
+  // };
 
   //Modal
   const [activeModal, setActiveModal] = useState("");
@@ -61,6 +111,11 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("savedArticles")) || [];
+    setSavedArticles(saved);
+  }, []);
+
   // useEffect(() => {
   //   getEverything(searchTerm)
   //     .then((data) => {
@@ -72,61 +127,65 @@ function App() {
   // }, [searchTerm]);
 
   return (
-    <div className="page">
-      <div className="page__content">
-        <Header
-          isSavedNews={isSavedNews}
-          isLoggedIn={isLoggedIn}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          handleSearch={handleSearch}
-          openLoginModal={openLoginModal}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <div className="page__content">
+          <Header
+            isSavedNews={isSavedNews}
+            isLoggedIn={isLoggedIn}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleSearch={handleSearch}
+            openLoginModal={openLoginModal}
+          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Main
+                    isSavedNews={isSavedNews}
+                    isLoggedIn={isLoggedIn}
+                    articles={articles}
+                    searchTerm={searchTerm}
+                    isLoading={isLoading}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/saved-news"
+              element={
+                isLoggedIn ? (
+                  <Main
+                    isSavedNews={isSavedNews}
+                    isLoggedIn={isLoggedIn}
+                    articles={articles}
+                    searchTerm={searchTerm}
+                    isLoading={isLoading}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+          </Routes>
+          <Footer />
+        </div>
+        <RegisterModal
+          closeActiveModal={closeActiveModal}
+          isOpen={activeModal === "register"}
+          switchRegisterModal={switchRegisterModal}
+          onRegister={onRegister}
         />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Main
-                  isSavedNews={isSavedNews}
-                  isLoggedIn={isLoggedIn}
-                  articles={articles}
-                  searchTerm={searchTerm}
-                  isLoading={isLoading}
-                />
-              </>
-            }
-          />
-          <Route
-            path="/saved-news"
-            element={
-              isLoggedIn ? (
-                <Main
-                  isSavedNews={isSavedNews}
-                  isLoggedIn={isLoggedIn}
-                  articles={articles}
-                  searchTerm={searchTerm}
-                  isLoading={isLoading}
-                />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
-        </Routes>
-        <Footer />
+        <LoginModal
+          closeActiveModal={closeActiveModal}
+          isOpen={activeModal === "login"}
+          switchLoginModal={switchLoginModal}
+          handleLoginSubmit={handleLogin}
+        />
       </div>
-      <RegisterModal
-        closeActiveModal={closeActiveModal}
-        isOpen={activeModal === "register"}
-        switchRegisterModal={switchRegisterModal}
-      />
-      <LoginModal
-        closeActiveModal={closeActiveModal}
-        isOpen={activeModal === "login"}
-        switchLoginModal={switchLoginModal}
-      />
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 

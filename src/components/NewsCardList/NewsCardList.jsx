@@ -15,10 +15,10 @@ function NewsCardList({
         <p>Saved News Page</p>
       ) : (
         <ul className="cards__list">
-          {articles.slice(0, articlesToShow).map((article, index) => {
+          {articles.slice(0, articlesToShow).map((article) => {
             return (
               <NewsCard
-                key={index}
+                key={article.url}
                 article={article}
                 category={searchTerm || "Top match"}
                 isSavedNews={isSavedNews}

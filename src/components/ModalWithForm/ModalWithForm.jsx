@@ -9,6 +9,7 @@ function ModalWithForm({
   switchModal,
   switchText,
   buttonText,
+  onSubmit,
 }) {
   useEffect(() => {
     const handleEscapeKey = (e) => {
@@ -43,13 +44,10 @@ function ModalWithForm({
           className="modal__close-btn"
           onClick={closeActiveModal}
         />
-        <form className="modal__form">
-          {/* {React.Children.map(children, (child) =>
-            React.cloneElement(child, { onChange: handleChange })
-          )} */}
+        <form className="modal__form" onSubmit={onSubmit}>
           {children}
           <div className="modal__form-btns">
-            <button type="button" className="modal__submit">
+            <button type="submit" className="modal__submit">
               {buttonText}
             </button>
             <button

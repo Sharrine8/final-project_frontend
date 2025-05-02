@@ -1,6 +1,25 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import React, { useState } from "react";
 
-function LoginModal({ closeActiveModal, isOpen, switchLoginModal }) {
+function LoginModal({
+  closeActiveModal,
+  isOpen,
+  switchLoginModal,
+  handleLoginSubmit,
+}) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setError("Please fill in both fields");
+      return;
+    }
+    console.log(email);
+    handleLoginSubmit({ email, password });
+  };
   return (
     <ModalWithForm
       title="Sign in"
@@ -9,6 +28,7 @@ function LoginModal({ closeActiveModal, isOpen, switchLoginModal }) {
       switchModal={switchLoginModal}
       switchText={"or Sign up"}
       buttonText={"Sign in"}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email{" "}
@@ -19,6 +39,8 @@ function LoginModal({ closeActiveModal, isOpen, switchLoginModal }) {
           id="login-email"
           placeholder="Enter email"
           required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -30,8 +52,11 @@ function LoginModal({ closeActiveModal, isOpen, switchLoginModal }) {
           id="login-password"
           placeholder="Enter password"
           required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </label>
+      {error && <p className="modal__error">{error}</p>}
     </ModalWithForm>
   );
 }
