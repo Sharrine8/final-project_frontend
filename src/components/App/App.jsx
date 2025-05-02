@@ -42,13 +42,6 @@ function App() {
 
   //Login/Logout
   const handleLogin = ({ email, password }) => {
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // if (email === user.email && password === user.password) {
-    //   setCurrentUser({ name: user.name, email: user.email });
-    //   setIsLoggedIn(true);
-    //   closeActiveModal();
-    // }
-    // return;
     authorize(email, password)
       .then((res) => {
         const token = res.token;
@@ -85,7 +78,6 @@ function App() {
       publishedAt: article.publishedAt,
       id: article.url,
     };
-    console.log(cleanedArticle);
     saveArticle(cleanedArticle)
       .then((saved) => {
         const updated = [saved, ...savedArticles];
@@ -97,7 +89,7 @@ function App() {
 
   const handleDeleteArticle = (articleId) => {
     deleteArticle(articleId)
-      .thenm(() => {
+      .then(() => {
         const updated = savedArticles.filter((a) => a.id !== articleId);
         setSavedArticles(updated);
         localStorage.setItem("savedArticles", JSON.stringify(updated));
@@ -213,6 +205,7 @@ function App() {
                     isLoading={isLoading}
                     onSave={handleSaveArticle}
                     onDelete={handleDeleteArticle}
+                    savedNews={savedArticles}
                   />
                 ) : (
                   <Navigate to="/" />

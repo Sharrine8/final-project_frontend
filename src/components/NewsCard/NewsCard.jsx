@@ -40,11 +40,13 @@ function NewsCard({
           />
         </div>
       ) : (
-        <button
-          onClick={() => onDelete(article.url)}
-          className="news-card__btn news-card__delete"
-          type="button"
-        />
+        <div className="news-card__btn-container">
+          <button
+            onClick={() => onDelete(article.url)}
+            className="news-card__btn news-card__delete"
+            type="button"
+          />
+        </div>
       )}
       <img
         src={urlToImage ? urlToImage : backup_img}
