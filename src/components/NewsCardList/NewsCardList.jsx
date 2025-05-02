@@ -9,12 +9,14 @@ function NewsCardList({
   searchTerm,
   handleShowMore,
   articlesToShow,
+  onSave,
+  onDelete,
 }) {
   const { pathname } = useLocation();
   return (
     <section className="cards">
       {pathname === "/saved-news" ? (
-        <p>Saved News Page</p>
+        <p>Hello</p>
       ) : (
         <ul className="cards__list">
           {articles.slice(0, articlesToShow).map((article) => {
@@ -25,6 +27,8 @@ function NewsCardList({
                 category={searchTerm || "Top match"}
                 isSavedNews={isSavedNews}
                 isLoggedIn={isLoggedIn}
+                onSave={onSave}
+                onDelete={onDelete}
               />
             );
           })}

@@ -6,7 +6,15 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./Main.css";
 
-function Main({ isSavedNews, isLoggedIn, articles, searchTerm, isLoading }) {
+function Main({
+  isSavedNews,
+  isLoggedIn,
+  articles,
+  searchTerm,
+  isLoading,
+  onSave,
+  onDelete,
+}) {
   const [articlesToShow, setArticlesToShow] = useState(3);
   const { pathname } = useLocation();
   const handleShowMore = () => {
@@ -26,6 +34,8 @@ function Main({ isSavedNews, isLoggedIn, articles, searchTerm, isLoading }) {
           isLoggedIn={isLoggedIn}
           handleShowMore={handleShowMore}
           articlesToShow={articlesToShow}
+          onSave={onSave}
+          onDelete={onDelete}
         />
       )}
       {pathname === "/" ? <About /> : ""}

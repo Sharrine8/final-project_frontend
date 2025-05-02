@@ -3,16 +3,23 @@ import "./NewsCard.css";
 import { Link, useLocation } from "react-router-dom";
 import backup_img from "../../assets/search_background.png";
 
-function NewsCard({ article, category, isSavedNews, isLoggedIn }) {
+function NewsCard({
+  article,
+  category,
+  isSavedNews,
+  isLoggedIn,
+  onSave,
+  onDelete,
+}) {
   const { title, description, url, urlToImage, source, publishedAt } = article;
   const { pathname } = useLocation();
+  const categoryUppercase =
+    category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
     <li className="news-card">
       <p className="news-card__category">
-        {category
-          ? category.charAt(0).toUpperCase() + category.slice(1)
-          : "Top match"}
+        {category ? categoryUppercase : "Top match"}
       </p>
       {pathname === "/" && !isLoggedIn ? (
         <div className="news-card__btn-container">
@@ -29,10 +36,15 @@ function NewsCard({ article, category, isSavedNews, isLoggedIn }) {
           <button
             className="news-card__btn news-card__bookmark"
             type="button"
+            onClick={() => onSave(article)}
           />
         </div>
       ) : (
-        <button className="news-card__btn news-card__delete" type="button" />
+        <button
+          onClick={() => onDelete(article.url)}
+          className="news-card__btn news-card__delete"
+          type="button"
+        />
       )}
       <img
         src={urlToImage ? urlToImage : backup_img}

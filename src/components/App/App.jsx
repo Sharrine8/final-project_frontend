@@ -7,11 +7,14 @@ import LoginModal from "../LoginModal/LoginModal";
 import { useState, useEffect } from "react";
 import { getEverything } from "../../utils/api";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { authorize, checkToken } from "../../utils/auth";
+import { saveArticle, deleteArticle } from "../../utils/api";
 import "./App.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [activeModal, setActiveModal] = useState("");
+  const [error, setError] = useState("");
   //Location
   const { pathname } = useLocation();
   const isSavedNews = pathname === "/saved-news";
@@ -39,13 +42,28 @@ function App() {
 
   //Login/Logout
   const handleLogin = ({ email, password }) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (email === user.email && password === user.password) {
-      setCurrentUser({ name: user.name, email: user.email });
-      setIsLoggedIn(true);
-      closeActiveModal();
-    }
-    return;
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // if (email === user.email && password === user.password) {
+    //   setCurrentUser({ name: user.name, email: user.email });
+    //   setIsLoggedIn(true);
+    //   closeActiveModal();
+    // }
+    // return;
+    authorize(email, password)
+      .then((res) => {
+        const token = res.token;
+        localStorage.setItem("token", token);
+        return checkToken(token);
+      })
+      .then((res) => {
+        const { name, email } = res.data;
+        setCurrentUser({ name, email });
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch(() => {
+        setError("Invalid email or password");
+      });
   };
 
   const handleLogout = () => {
@@ -53,6 +71,38 @@ function App() {
     setCurrentUser({ password: "", name: "", email: "" });
     setIsLoggedIn(false);
     closeActiveModal();
+  };
+
+  //Save or delete articles
+  const handleSaveArticle = (article) => {
+    console.log(article);
+    const cleanedArticle = {
+      title: article.title,
+      description: article.description,
+      url: article.url,
+      urlToImage: article.urlToImage,
+      source: article.source,
+      publishedAt: article.publishedAt,
+      id: article.url,
+    };
+    console.log(cleanedArticle);
+    saveArticle(cleanedArticle)
+      .then((saved) => {
+        const updated = [saved, ...savedArticles];
+        setSavedArticles(updated);
+        localStorage.setItem("savedArticles", JSON.stringify(updated));
+      })
+      .catch((err) => console.error("Failed to save article", err));
+  };
+
+  const handleDeleteArticle = (articleId) => {
+    deleteArticle(articleId)
+      .thenm(() => {
+        const updated = savedArticles.filter((a) => a.id !== articleId);
+        setSavedArticles(updated);
+        localStorage.setItem("savedArticles", JSON.stringify(updated));
+      })
+      .catch((err) => console.error("Failed to delete article", err));
   };
 
   //Modal
@@ -110,15 +160,15 @@ function App() {
   //     });
   // }, [searchTerm]);
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
-      setActiveModal("login");
-      return;
-    }
-    setCurrentUser({ name: user.name, email: user.email });
-    setIsLoggedIn(true);
-  }, []);
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   if (!user) {
+  //     setActiveModal("login");
+  //     return;
+  //   }
+  //   setCurrentUser({ name: user.name, email: user.email });
+  //   setIsLoggedIn(true);
+  // }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -145,6 +195,8 @@ function App() {
                     articles={articles}
                     searchTerm={searchTerm}
                     isLoading={isLoading}
+                    onSave={handleSaveArticle}
+                    onDelete={handleDeleteArticle}
                   />
                 </>
               }
@@ -159,6 +211,8 @@ function App() {
                     articles={articles}
                     searchTerm={searchTerm}
                     isLoading={isLoading}
+                    onSave={handleSaveArticle}
+                    onDelete={handleDeleteArticle}
                   />
                 ) : (
                   <Navigate to="/" />
