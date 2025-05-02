@@ -11,6 +11,7 @@ import "./App.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [activeModal, setActiveModal] = useState("");
   //Location
   const { pathname } = useLocation();
   const isSavedNews = pathname === "/saved-news";
@@ -24,7 +25,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
-  const [error, setError] = useState("");
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
@@ -33,15 +33,8 @@ function App() {
   //Register
 
   const onRegister = ({ email, password, name }) => {
-    // if (!currentUser.name || !currentUser.email || !password) {
-    //   setError("All fields are required.");
-    //   return;
-    // }
-    console.log(email, name);
-
     localStorage.setItem("user", JSON.stringify({ email, password, name }));
     closeActiveModal();
-    // setError("");
   };
 
   //Login/Logout
@@ -51,9 +44,6 @@ function App() {
       setCurrentUser({ name: user.name, email: user.email });
       setIsLoggedIn(true);
       closeActiveModal();
-    } else {
-      setError("Invalid email or password.");
-      console.log("Wrong email or password");
     }
     return;
   };
@@ -65,13 +55,7 @@ function App() {
     closeActiveModal();
   };
 
-  // const handleLoginSubmit = ({ email, password }) => {
-  //   handleLogin({ email, password });
-  // };
-
   //Modal
-  const [activeModal, setActiveModal] = useState("");
-
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -126,6 +110,16 @@ function App() {
   //     });
   // }, [searchTerm]);
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      setActiveModal("login");
+      return;
+    }
+    setCurrentUser({ name: user.name, email: user.email });
+    setIsLoggedIn(true);
+  }, []);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -137,6 +131,8 @@ function App() {
             setSearchTerm={setSearchTerm}
             handleSearch={handleSearch}
             openLoginModal={openLoginModal}
+            onLogout={handleLogout}
+            savedArticles={savedArticles}
           />
           <Routes>
             <Route

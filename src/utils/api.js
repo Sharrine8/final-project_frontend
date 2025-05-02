@@ -18,7 +18,7 @@ export function getEverything(query = "technology") {
     query
   )}&pageSize=100&apiKey=${API_KEY}`;
 
-  // Use CORS proxy
+  // Use CORS proxy -- need for local connection
   const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(
     apiUrl
   )}`;

@@ -14,18 +14,25 @@ function NewsCard({ article, category, isSavedNews, isLoggedIn }) {
           ? category.charAt(0).toUpperCase() + category.slice(1)
           : "Top match"}
       </p>
-      {!isSavedNews ? (
+      {pathname === "/" && !isLoggedIn ? (
         <div className="news-card__btn-container">
           <button
             className="news-card__btn news-card__bookmark"
-            type="submit"
+            type="button"
           />
           <div className="news-card__bookmark-overlay">
             Sign in to save articles
           </div>
         </div>
+      ) : pathname === "/" && isLoggedIn ? (
+        <div className="news-card__btn-container">
+          <button
+            className="news-card__btn news-card__bookmark"
+            type="button"
+          />
+        </div>
       ) : (
-        <button className="news-card__btn news-card__delete" type="submit" />
+        <button className="news-card__btn news-card__delete" type="button" />
       )}
       <img
         src={urlToImage ? urlToImage : backup_img}

@@ -3,10 +3,12 @@ import Preloader from "../Preloader/Preloader";
 import NothingFound from "../NothingFound/NothingFound";
 import About from "../About/About";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./Main.css";
 
 function Main({ isSavedNews, isLoggedIn, articles, searchTerm, isLoading }) {
   const [articlesToShow, setArticlesToShow] = useState(3);
+  const { pathname } = useLocation();
   const handleShowMore = () => {
     setArticlesToShow((prev) => prev + 3);
   };
@@ -26,7 +28,7 @@ function Main({ isSavedNews, isLoggedIn, articles, searchTerm, isLoading }) {
           articlesToShow={articlesToShow}
         />
       )}
-      <About />
+      {pathname === "/" ? <About /> : ""}
     </section>
   );
 }

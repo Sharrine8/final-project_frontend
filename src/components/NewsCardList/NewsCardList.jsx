@@ -1,4 +1,5 @@
 import NewsCard from "../NewsCard/NewsCard";
+import { useLocation } from "react-router-dom";
 import "./NewsCardList.css";
 
 function NewsCardList({
@@ -9,9 +10,10 @@ function NewsCardList({
   handleShowMore,
   articlesToShow,
 }) {
+  const { pathname } = useLocation();
   return (
     <section className="cards">
-      {isSavedNews ? (
+      {pathname === "/saved-news" ? (
         <p>Saved News Page</p>
       ) : (
         <ul className="cards__list">

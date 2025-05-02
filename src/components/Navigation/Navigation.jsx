@@ -3,7 +3,7 @@ import logout_black from "../../assets/logout-black.svg";
 import logout_white from "../../assets/logout-white.svg";
 import "./Navigation.css";
 
-function Navigation({ isLoggedIn, openLoginModal }) {
+function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
   return (
@@ -42,6 +42,7 @@ function Navigation({ isLoggedIn, openLoginModal }) {
           </li>
           <li className="nav__li">
             <button
+              onClick={onLogout}
               className={`nav__link nav__btn ${
                 isHome ? "nav__btn_logged-in_white" : "nav__btn_logged-in_black"
               }`}
