@@ -15,6 +15,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [error, setError] = useState("");
+  const [keywords, setKeywords] = useState([]);
   //Location
   const { pathname } = useLocation();
   const isSavedNews = pathname === "/saved-news";
@@ -54,7 +55,8 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         setError("Invalid email or password");
       });
   };
@@ -68,6 +70,7 @@ function App() {
 
   //Save or delete articles
   const handleSaveArticle = (article) => {
+    console.log(searchTerm);
     console.log(article);
     const cleanedArticle = {
       title: article.title,
@@ -76,10 +79,12 @@ function App() {
       urlToImage: article.urlToImage,
       source: article.source,
       publishedAt: article.publishedAt,
-      id: article.url,
+      id: article.id,
+      keyword: article.keyword,
     };
     saveArticle(cleanedArticle)
       .then((saved) => {
+        setKeywords([searchTerm, ...keywords]);
         const updated = [saved, ...savedArticles];
         setSavedArticles(updated);
         localStorage.setItem("savedArticles", JSON.stringify(updated));
@@ -120,21 +125,46 @@ function App() {
   };
 
   //Search Form API
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (searchTerm.trim() === "") {
-      setArticles([]);
-      return;
-    }
-    try {
-      setIsLoading(true);
-      const data = await getEverything(searchTerm);
-      setArticles(data.articles);
-    } catch (err) {
-      console.error("Failed to fetch articles");
-    } finally {
-      setIsLoading(false);
-    }
+  // const handleSearch = async (e) => {
+  //   e.preventDefault();
+  //   if (searchTerm.trim() === "") {
+  //     setArticles([]);
+  //     return;
+  //   }
+  //   try {
+  //     setIsLoading(true);
+  //     const data = await getEverything(searchTerm);
+  //     setArticles(data.articles);
+  //     //add a field to each object with a searchterm
+  //     //where render cards, check for searchterm from article object
+  //     //not from the prop
+  //   } catch (err) {
+  //     console.error("Failed to fetch articles");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+  const handleSearch = (searchTerm) => {
+    setIsLoading(true);
+    getEverything(searchTerm)
+      .then((res) => {
+        const newCards = res.articles.map((card) => ({
+          title: card.title,
+          description: article.description,
+          url: article.url,
+          urlToImage: card.urlToImage,
+          source: card.source,
+          publishedAt: card.publishedAt,
+          id: Math.random(),
+          keyword: searchTerm,
+        }));
+        setArticles((prevArticles) => [...newCards, ...prevArticles]);
+        console.log(articles);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch articles", err);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -175,6 +205,7 @@ function App() {
             openLoginModal={openLoginModal}
             onLogout={handleLogout}
             savedArticles={savedArticles}
+            keywords={keywords}
           />
           <Routes>
             <Route

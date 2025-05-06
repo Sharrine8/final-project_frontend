@@ -13,8 +13,8 @@ function NewsCard({
 }) {
   const { title, description, url, urlToImage, source, publishedAt } = article;
   const { pathname } = useLocation();
-  const categoryUppercase =
-    category.charAt(0).toUpperCase() + category.slice(1);
+  const keyword = category;
+  const categoryUppercase = keyword.charAt(0).toUpperCase() + category.slice(1);
 
   return (
     <li className="news-card">

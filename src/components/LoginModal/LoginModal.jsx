@@ -18,7 +18,8 @@ function LoginModal({
       setError("Please fill in both fields");
       return;
     }
-    console.log(email);
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
     handleLoginSubmit({ email, password });
   };
   return (

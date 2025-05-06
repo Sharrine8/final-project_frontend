@@ -14,9 +14,25 @@ function Header({
   openLoginModal,
   onLogout,
   savedArticles,
+  keywords,
 }) {
   const { pathname } = useLocation();
   const currentUser = useContext(CurrentUserContext);
+
+  const formatKeywords = () => {
+    const capitalize = (word) =>
+      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+
+    const uniqueKeywords = [...new Set(keywords.map(capitalize))];
+
+    if (uniqueKeywords.length === 0) return "";
+    if (uniqueKeywords.length === 1) return uniqueKeywords[0];
+    if (uniqueKeywords.length === 2) return uniqueKeywords.join(" and ");
+
+    const last = uniqueKeywords.pop();
+    return `${uniqueKeywords.join(", ")}, and ${last}`;
+  };
+  console.log(keywords);
 
   return (
     <header className={`header ${isSavedNews ? "" : "header__home"}`}>
@@ -31,9 +47,7 @@ function Header({
           <p className="header__text">
             {currentUser.name}, you have {savedArticles.length} saved articles
           </p>
-          <p className="header__keywords">
-            By keywords: Nature, Yellowstone, and 2 other
-          </p>
+          <p className="header__keywords">By keywords: {formatKeywords()}</p>
         </section>
       ) : (
         <section className="header__container header__container_home">

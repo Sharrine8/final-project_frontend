@@ -14,15 +14,20 @@ function NewsCardList({
   savedNews,
 }) {
   const { pathname } = useLocation();
+
   return (
     <section className="cards">
       {pathname === "/saved-news" ? (
         <ul className="cards__list">
-          {savedNews.slice(0, articlesToShow).map((article) => {
+          {savedNews.slice(0, articlesToShow).map((article, index) => {
+            const articleWithKeyword = {
+              ...article,
+              keyword: searchTerm,
+            };
             return (
               <NewsCard
-                key={article.url}
-                article={article}
+                key={index}
+                article={articleWithKeyword}
                 category={searchTerm || "Top match"}
                 isSavedNews={isSavedNews}
                 isLoggedIn={isLoggedIn}
@@ -34,11 +39,15 @@ function NewsCardList({
         </ul>
       ) : (
         <ul className="cards__list">
-          {articles.slice(0, articlesToShow).map((article) => {
+          {articles.slice(0, articlesToShow).map((article, index) => {
+            const articleWithKeyword = {
+              ...article,
+              keyword: searchTerm,
+            };
             return (
               <NewsCard
-                key={article.url}
-                article={article}
+                key={index}
+                article={articleWithKeyword}
                 category={searchTerm || "Top match"}
                 isSavedNews={isSavedNews}
                 isLoggedIn={isLoggedIn}
