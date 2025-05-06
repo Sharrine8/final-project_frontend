@@ -21,7 +21,7 @@ A responsive web application that allows users to search for news articles, save
 
 ## 📸 Preview
 
-![screenshot](./preview.png) <!-- Optional: Add your screenshot or GIF -->
+![deployed site](https://sharrine8.github.io/final-project_frontend/) <!-- Optional: Add your screenshot or GIF -->
 
 ---
 
@@ -30,6 +30,6 @@ A responsive web application that allows users to search for news articles, save
 Clone the repo:
 
 ```bash
-git clone https://github.com/your-username/news-explorer-frontend.git
-cd news-explorer-frontend
+git clone https://github.com/sharrine8/final-project_frontend.git
+cd frontend
 ```

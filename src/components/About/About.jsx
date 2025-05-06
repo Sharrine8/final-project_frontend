@@ -9,15 +9,23 @@ function About() {
       <div className="about__info">
         <h2 className="about__title">About the author</h2>
         <p className="about__text">
-          Lorem ipsum dolor sit amet. Cum voluptas ipsa est ullam deleniti id
-          beatae autem qui dolorem architecto qui consequatur repellat? Sed
-          voluptas galisum et rerum accusantium ut officia dolorum ad provident
-          quas. Ut reiciendis illum id tempore libero sit vero dolores est ipsa
-          ipsum. Est delectus rerum est voluptatem eaque et officia dolor aut
-          dolorum excepturi. Eos molestiae nesciunt et omnis veritatis quo
-          consectetur impedit et temporibus dolorem eos iure quia ut voluptas
-          autem in maiores autem. Qui molestias veniam id ullam debitis in sunt
-          possimus ut rerum enim aut nihil voluptatem eum suscipit galisum?
+          I am a software engineer and a senior student at TripleTen,
+          specializing in full-stack development with a strong focus on the MERN
+          stack (MongoDB, Express, React, Node.js) and JavaScript. Over the past
+          year, I have honed my skills in building and deploying scalable web
+          applications, with expertise in areas such as API development, user
+          authentication, and data validation. I am proficient in using tools
+          like Postman for API testing and Figma for designing intuitive user
+          interfaces. <br />
+          Fluent in English, Portuguese, Mandarin, and Spanish, I am able to
+          collaborate effectively with international teams and understand
+          diverse user needs. I am passionate about continuous learning and
+          apply a problem-solving mindset to every project I undertake. Outside
+          of my professional life, I enjoy reading, traveling, playing guitar
+          and piano, and exploring nature. <br />
+          With a solid foundation in full-stack development, I am eager to
+          contribute to impactful projects and further refine my technical and
+          collaborative skills.
         </p>
       </div>
     </section>
