@@ -62,10 +62,12 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.clear();
     setCurrentUser({ password: "", name: "", email: "" });
     setIsLoggedIn(false);
+    setSavedArticles([]);
     closeActiveModal();
+    window.location.reload();
   };
 
   //Save or delete articles
@@ -83,6 +85,7 @@ function App() {
     saveArticle(cleanedArticle)
       .then((saved) => {
         setKeywords([searchTerm, ...keywords]);
+        localStorage.setItem("keywords", JSON.stringify(keywords));
         const updated = [saved, ...savedArticles];
         setSavedArticles(updated);
         localStorage.setItem("savedArticles", JSON.stringify(updated));
@@ -148,18 +151,20 @@ function App() {
   };
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("savedArticles")) || [];
-    setSavedArticles(saved);
-  }, []);
+    const savedNews = JSON.parse(localStorage.getItem("savedArticles")) || [];
+    setSavedArticles(savedNews);
+    const savedKeywords = JSON.parse(localStorage.getItem("keywords"));
+    setKeywords(savedKeywords);
+  }, [currentUser]);
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   if (!user) {
-  //     return;
-  //   }
-  //   setCurrentUser({ name: user.name, email: user.email });
-  //   setIsLoggedIn(true);
-  // }, []);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      return;
+    }
+    setCurrentUser({ name: user.name, email: user.email });
+    setIsLoggedIn(true);
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

@@ -11,15 +11,15 @@ function NewsCard({
   onSave,
   onDelete,
 }) {
-  const { title, description, url, urlToImage, source, publishedAt, keyword } =
-    article;
+  const { title, description, url, urlToImage, source, publishedAt } = article;
   const { pathname } = useLocation();
-  const categoryUppercase = keyword.charAt(0).toUpperCase() + keyword.slice(1);
+  const categoryUppercase =
+    category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
     <li className="news-card">
       <p className="news-card__category">
-        {article.keyword ? categoryUppercase : "Top match"}
+        {category ? categoryUppercase : "Top match"}
       </p>
       {pathname === "/" && !isLoggedIn ? (
         <div className="news-card__btn-container">
@@ -42,7 +42,7 @@ function NewsCard({
       ) : (
         <div className="news-card__btn-container">
           <button
-            onClick={() => onDelete(article.url)}
+            onClick={() => onDelete(article.id)}
             className="news-card__btn news-card__delete"
             type="button"
           />

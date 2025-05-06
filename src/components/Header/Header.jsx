@@ -28,9 +28,12 @@ function Header({
     if (uniqueKeywords.length === 0) return "";
     if (uniqueKeywords.length === 1) return uniqueKeywords[0];
     if (uniqueKeywords.length === 2) return uniqueKeywords.join(" and ");
+    if (uniqueKeywords.length === 3)
+      return `${uniqueKeywords[0]}, ${uniqueKeywords[1]}, and ${uniqueKeywords[2]}`;
 
-    const last = uniqueKeywords.pop();
-    return `${uniqueKeywords.join(", ")}, and ${last}`;
+    return `${uniqueKeywords[0]}, ${uniqueKeywords[1]}, and ${
+      uniqueKeywords.length - 2
+    } others`;
   };
 
   return (
@@ -46,7 +49,9 @@ function Header({
           <p className="header__text">
             {currentUser.name}, you have {savedArticles.length} saved articles
           </p>
-          <p className="header__keywords">By keywords: {formatKeywords()}</p>
+          <p className="header__keywords">
+            By keywords: <strong>{formatKeywords()}</strong>
+          </p>
         </section>
       ) : (
         <section className="header__container header__container_home">

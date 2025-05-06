@@ -1,6 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import React, { useState } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function LoginModal({
   closeActiveModal,
