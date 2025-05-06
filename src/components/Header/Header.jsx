@@ -32,7 +32,6 @@ function Header({
     const last = uniqueKeywords.pop();
     return `${uniqueKeywords.join(", ")}, and ${last}`;
   };
-  console.log(keywords);
 
   return (
     <header className={`header ${isSavedNews ? "" : "header__home"}`}>

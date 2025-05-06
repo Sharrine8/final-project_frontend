@@ -14,7 +14,6 @@ import "./App.css";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [activeModal, setActiveModal] = useState("");
-  const [error, setError] = useState("");
   const [keywords, setKeywords] = useState([]);
   //Location
   const { pathname } = useLocation();
@@ -26,6 +25,7 @@ function App() {
   const [savedArticles, setSavedArticles] = useState([]);
 
   //User Info
+  const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
@@ -70,8 +70,6 @@ function App() {
 
   //Save or delete articles
   const handleSaveArticle = (article) => {
-    console.log(searchTerm);
-    console.log(article);
     const cleanedArticle = {
       title: article.title,
       description: article.description,
@@ -125,33 +123,16 @@ function App() {
   };
 
   //Search Form API
-  // const handleSearch = async (e) => {
-  //   e.preventDefault();
-  //   if (searchTerm.trim() === "") {
-  //     setArticles([]);
-  //     return;
-  //   }
-  //   try {
-  //     setIsLoading(true);
-  //     const data = await getEverything(searchTerm);
-  //     setArticles(data.articles);
-  //     //add a field to each object with a searchterm
-  //     //where render cards, check for searchterm from article object
-  //     //not from the prop
-  //   } catch (err) {
-  //     console.error("Failed to fetch articles");
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-  const handleSearch = (searchTerm) => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     setIsLoading(true);
     getEverything(searchTerm)
       .then((res) => {
+        console.log(res);
         const newCards = res.articles.map((card) => ({
           title: card.title,
-          description: article.description,
-          url: article.url,
+          description: card.description,
+          url: card.url,
           urlToImage: card.urlToImage,
           source: card.source,
           publishedAt: card.publishedAt,
@@ -159,7 +140,6 @@ function App() {
           keyword: searchTerm,
         }));
         setArticles((prevArticles) => [...newCards, ...prevArticles]);
-        console.log(articles);
       })
       .catch((err) => {
         console.error("Failed to fetch articles", err);
@@ -173,19 +153,8 @@ function App() {
   }, []);
 
   // useEffect(() => {
-  //   getEverything(searchTerm)
-  //     .then((data) => {
-  //       setArticles(data.articles);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching articles:", error);
-  //     });
-  // }, [searchTerm]);
-
-  // useEffect(() => {
   //   const user = JSON.parse(localStorage.getItem("user"));
   //   if (!user) {
-  //     setActiveModal("login");
   //     return;
   //   }
   //   setCurrentUser({ name: user.name, email: user.email });

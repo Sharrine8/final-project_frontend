@@ -20,15 +20,11 @@ function NewsCardList({
       {pathname === "/saved-news" ? (
         <ul className="cards__list">
           {savedNews.slice(0, articlesToShow).map((article, index) => {
-            const articleWithKeyword = {
-              ...article,
-              keyword: searchTerm,
-            };
             return (
               <NewsCard
                 key={index}
-                article={articleWithKeyword}
-                category={searchTerm || "Top match"}
+                article={article}
+                category={article.keyword || "Top match"}
                 isSavedNews={isSavedNews}
                 isLoggedIn={isLoggedIn}
                 onSave={onSave}
@@ -40,15 +36,11 @@ function NewsCardList({
       ) : (
         <ul className="cards__list">
           {articles.slice(0, articlesToShow).map((article, index) => {
-            const articleWithKeyword = {
-              ...article,
-              keyword: searchTerm,
-            };
             return (
               <NewsCard
                 key={index}
-                article={articleWithKeyword}
-                category={searchTerm || "Top match"}
+                article={article}
+                category={article.keyword || "Top match"}
                 isSavedNews={isSavedNews}
                 isLoggedIn={isLoggedIn}
                 onSave={onSave}

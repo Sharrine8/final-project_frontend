@@ -1,6 +1,10 @@
 import "./SearchForm.css";
 
 function SearchForm({ searchTerm, setSearchTerm, handleSearch }) {
+  const onChange = (e) => {
+    let term = e.target.value;
+    setSearchTerm(term);
+  };
   return (
     <section className="search-form">
       <form className="search-form__form" onSubmit={handleSearch}>
@@ -9,7 +13,7 @@ function SearchForm({ searchTerm, setSearchTerm, handleSearch }) {
           placeholder="Enter topic"
           type="text"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={onChange}
         />
         <button className="search-form__btn">Search</button>
       </form>
