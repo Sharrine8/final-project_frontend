@@ -19,6 +19,7 @@ function Header({
   const currentUser = useContext(CurrentUserContext);
 
   const formatKeywords = () => {
+    if (!Array.isArray(keywords) || keywords.length === 0) return "";
     const capitalize = (word) =>
       word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 

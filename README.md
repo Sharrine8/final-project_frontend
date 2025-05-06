@@ -1,12 +1,35 @@
-# React + Vite
+# 📰 News Explorer (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive web application that allows users to search for news articles, save them to their account, and view their saved articles. Built with **React**, **Vite**, and deployed via **GitHub Pages**.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Search for current news articles by keyword
+- Responsive and accessible UI
+- Save and manage favorite articles (with login)
+- Keyword highlighting and filtering
+- Deployed to GitHub Pages
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [NewsAPI](https://newsapi.org/) for fetching articles
+- GitHub Pages for deployment
+
+---
+
+## 📸 Preview
+
+![screenshot](./preview.png) <!-- Optional: Add your screenshot or GIF -->
+
+---
+
+## 📦 Installation & Local Setup
+
+Clone the repo:
+
+```bash
+git clone https://github.com/your-username/news-explorer-frontend.git
+cd news-explorer-frontend
+```

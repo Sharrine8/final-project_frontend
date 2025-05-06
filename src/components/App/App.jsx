@@ -84,8 +84,9 @@ function App() {
     };
     saveArticle(cleanedArticle)
       .then((saved) => {
-        setKeywords([searchTerm, ...keywords]);
-        localStorage.setItem("keywords", JSON.stringify(keywords));
+        const updatedKeywords = [searchTerm, ...keywords];
+        setKeywords(updatedKeywords);
+        localStorage.setItem("keywords", JSON.stringify(updatedKeywords));
         const updated = [saved, ...savedArticles];
         setSavedArticles(updated);
         localStorage.setItem("savedArticles", JSON.stringify(updated));
@@ -146,20 +147,25 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  useEffect(() => {
-    const savedNews = JSON.parse(localStorage.getItem("savedArticles")) || [];
-    setSavedArticles(savedNews);
-    const savedKeywords = JSON.parse(localStorage.getItem("keywords"));
-    setKeywords(savedKeywords);
-  }, [currentUser]);
+  // useEffect(() => {
+  //   const savedNews = JSON.parse(localStorage.getItem("savedArticles")) || [];
+  //   setSavedArticles(savedNews);
+  //   const savedKeywords = JSON.parse(localStorage.getItem("keywords"));
+  //   setKeywords(savedKeywords);
+  // }, [currentUser]);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
+      localStorage.clear();
       return;
     }
     setCurrentUser({ name: user.name, email: user.email });
     setIsLoggedIn(true);
+    const savedNews = JSON.parse(localStorage.getItem("savedArticles")) || [];
+    setSavedArticles(savedNews);
+    const savedKeywords = JSON.parse(localStorage.getItem("keywords" || []));
+    setKeywords(savedKeywords);
   }, []);
 
   return (
