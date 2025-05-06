@@ -16,7 +16,6 @@ function Header({
   savedArticles,
   keywords,
 }) {
-  const { pathname } = useLocation();
   const currentUser = useContext(CurrentUserContext);
 
   const formatKeywords = () => {

@@ -3,14 +3,7 @@ import "./NewsCard.css";
 import { Link, useLocation } from "react-router-dom";
 import backup_img from "../../assets/search_background.png";
 
-function NewsCard({
-  article,
-  category,
-  isSavedNews,
-  isLoggedIn,
-  onSave,
-  onDelete,
-}) {
+function NewsCard({ article, category, isLoggedIn, onSave, onDelete }) {
   const { title, description, url, urlToImage, source, publishedAt } = article;
   const { pathname } = useLocation();
   const categoryUppercase =

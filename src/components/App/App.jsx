@@ -107,9 +107,6 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
-  const openRegisterModal = () => {
-    setActiveModal("register");
-  };
 
   const openLoginModal = () => {
     setActiveModal("login");
@@ -131,7 +128,6 @@ function App() {
     setIsLoading(true);
     getEverything(searchTerm)
       .then((res) => {
-        console.log(res);
         const newCards = res.articles.map((card) => ({
           title: card.title,
           description: card.description,

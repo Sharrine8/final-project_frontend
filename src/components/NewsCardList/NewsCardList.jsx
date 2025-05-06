@@ -6,7 +6,6 @@ function NewsCardList({
   isSavedNews,
   isLoggedIn,
   articles,
-  searchTerm,
   handleShowMore,
   articlesToShow,
   onSave,
