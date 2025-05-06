@@ -147,13 +147,6 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  // useEffect(() => {
-  //   const savedNews = JSON.parse(localStorage.getItem("savedArticles")) || [];
-  //   setSavedArticles(savedNews);
-  //   const savedKeywords = JSON.parse(localStorage.getItem("keywords"));
-  //   setKeywords(savedKeywords);
-  // }, [currentUser]);
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
@@ -164,7 +157,7 @@ function App() {
     setIsLoggedIn(true);
     const savedNews = JSON.parse(localStorage.getItem("savedArticles")) || [];
     setSavedArticles(savedNews);
-    const savedKeywords = JSON.parse(localStorage.getItem("keywords" || []));
+    const savedKeywords = JSON.parse(localStorage.getItem("keywords")) || [];
     setKeywords(savedKeywords);
   }, []);
 
