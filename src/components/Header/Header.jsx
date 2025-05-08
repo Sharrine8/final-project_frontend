@@ -44,7 +44,7 @@ function Header({
         onLogout={onLogout}
       />
       {isSavedNews ? (
-        <section className="header__container header__container_saved-news">
+        <section className="header__container header__container_type_saved-news">
           <h2 className="header__saved-news-title">Saved articles</h2>
           <p className="header__text">
             {currentUser.name}, you have {savedArticles.length} saved articles
@@ -54,7 +54,7 @@ function Header({
           </p>
         </section>
       ) : (
-        <section className="header__container header__container_home">
+        <section className="header__container header__container_type_home">
           <h1 className="header__title">What's going on in the world?</h1>
           <p className="header__subtitle">
             Find the latest news on any topic and save them in your personal

@@ -12,6 +12,7 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   width: 100%;
+  object-fit: cover;
 }
 
 .news-card__info {
@@ -66,6 +67,8 @@
   font-family: "RobotoSlab-Bold", Arial, sans-serif;
   font-weight: 700;
   font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .news-card__category {
@@ -141,4 +144,41 @@
 
 .news-card__delete:hover {
   background-image: url("../../assets/trash-hover.png");
+}
+
+@media (max-width: 768px) {
+  .news-card {
+    max-width: 224px;
+    max-height: 420px;
+  }
+
+  .news-card__img {
+    height: 150px;
+  }
+
+  .news-card__info {
+    padding: 16px;
+  }
+
+  .news-card__title {
+    font-size: 22px;
+  }
+
+  .news-card__source {
+    bottom: 16px;
+    left: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .news-card__btn-container {
+    top: 8px;
+    right: 8px;
+  }
+
+  .news-card__category {
+    top: 8px;
+    left: 8px;
+    padding: 12px 20px;
+  }
 }

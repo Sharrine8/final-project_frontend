@@ -16,13 +16,8 @@ function About() {
           applications, with expertise in areas such as API development, user
           authentication, and data validation. I am proficient in using tools
           like Postman for API testing and Figma for designing intuitive user
-          interfaces. <br />
-          Fluent in English, Portuguese, Mandarin, and Spanish, I am able to
-          collaborate effectively with international teams and understand
-          diverse user needs. I am passionate about continuous learning and
-          apply a problem-solving mindset to every project I undertake. Outside
-          of my professional life, I enjoy reading, traveling, playing guitar
-          and piano, and exploring nature. <br />
+          interfaces.
+          <br />
           With a solid foundation in full-stack development, I am eager to
           contribute to impactful projects and further refine my technical and
           collaborative skills.

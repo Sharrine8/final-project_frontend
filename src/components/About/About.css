@@ -33,12 +33,20 @@
 
 @media (max-width: 768px) {
   .about {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    text-align: center;
+    gap: 32px;
+    padding: 40px;
+    display: flex;
   }
 
   .about__img {
     margin: 0 auto;
+    height: 232px;
+    width: 232px;
+  }
+
+  .about__title {
+    font-size: 30px;
+    margin: 16px 0;
+    text-align: left;
   }
 }

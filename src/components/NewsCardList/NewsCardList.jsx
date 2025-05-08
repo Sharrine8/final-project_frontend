@@ -49,11 +49,12 @@ function NewsCardList({
           })}
         </ul>
       )}
-      {articlesToShow < articles.length && (
+      {(pathname !== "/saved-news" && articlesToShow < articles.length) ||
+      (pathname === "/saved-news" && articlesToShow < savedNews.length) ? (
         <button className="cards__show-more-btn" onClick={handleShowMore}>
           Show more
         </button>
-      )}
+      ) : null}
     </section>
   );
 }

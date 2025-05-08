@@ -1,11 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import logout_black from "../../assets/logout-black.svg";
+import { useContext } from "react";
 import logout_white from "../../assets/logout-white.svg";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Navigation.css";
 
 function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
+  const currentUser = useContext(CurrentUserContext);
   return (
     <nav className={`nav ${isHome ? "" : "nav__saved-news"}`}>
       <Link
@@ -19,7 +22,7 @@ function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
           <li className="nav__li">
             <Link
               to="/"
-              className={`nav__link nav__link_home ${
+              className={`nav__link nav__link_type_home ${
                 isHome
                   ? "nav__link_white nav__link_white_active"
                   : "nav__link_black"
@@ -47,7 +50,7 @@ function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
                 isHome ? "nav__btn_logged-in_white" : "nav__btn_logged-in_black"
               }`}
             >
-              Log out
+              {currentUser.name}
               <img
                 alt="logout-icon"
                 src={isHome ? logout_white : logout_black}
@@ -60,7 +63,7 @@ function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
           <li className="nav__li">
             <Link
               to="/"
-              className="nav__link nav__link_home nav__link_white_active"
+              className="nav__link nav__link_type_home nav__link_white_active"
             >
               Home
             </Link>

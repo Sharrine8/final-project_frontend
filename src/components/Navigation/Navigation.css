@@ -46,7 +46,7 @@
   cursor: pointer;
 }
 
-.nav__link_home {
+.nav__link_type_home {
   width: 68px;
   height: 80px;
   display: flex;
@@ -107,4 +107,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 770px) {
+  .nav {
+    padding: 0 40px;
+    min-height: 66px;
+    height: 66px;
+  }
+
+  .nav__links {
+    gap: 16px;
+  }
+
+  .nav__link {
+    font-size: 16px;
+  }
+
+  .nav__link_type_home {
+    height: 66px;
+  }
+
+  .nav__link_saved-news {
+    height: 66px;
+  }
+
+  .nav__btn {
+    max-width: 120px;
+    max-height: 40px;
+  }
 }

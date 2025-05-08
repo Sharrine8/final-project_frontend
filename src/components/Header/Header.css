@@ -17,13 +17,13 @@
   gap: 32px;
 }
 
-.header__container_home {
+.header__container_type_home {
   margin: 0 auto;
   padding: 80px 0;
   gap: 28px;
 }
 
-.header__container_saved-news {
+.header__container_type_saved-news {
   padding: 40px 104px;
   margin: 0;
 }
@@ -64,4 +64,21 @@
   flex-wrap: wrap;
   max-width: 530px;
   margin: 0;
+}
+
+.header__keywords {
+  font-size: 18px;
+}
+
+@media (max-width: 770px) {
+  .header__container_type_saved-news {
+    gap: 20px;
+  }
+
+  .header__container_type_home {
+    max-width: 608px;
+  }
+  .header__container .header__text {
+    font-size: 30px;
+  }
 }

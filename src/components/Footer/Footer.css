@@ -10,6 +10,7 @@
   color: #b6bcbf;
   font-family: "Roboto-Regular", Arial, sans-serif;
   font-weight: 400;
+  font-size: 16px;
 }
 
 .footer__links {
@@ -51,4 +52,11 @@
 .footer__linkedin {
   background: transparent url("../../assets/linkedin-logo.svg") center no-repeat;
   background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 0 40px;
+    height: 64px;
+  }
 }
