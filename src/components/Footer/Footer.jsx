@@ -5,14 +5,15 @@ function Footer() {
   return (
     <footer className="footer">
       <p className="footer__info">@2024 Supersite, Powered by News API</p>
-      <div className="footer__links">
-        <Link to="/" className="footer__link">
-          Home
-        </Link>
-        <Link to="https:/www.tripleten.com" className="footer__link">
-          TripleTen
-        </Link>
-
+      <div className="footer__links-container">
+        <div className="footer__links">
+          <Link to="/" className="footer__link">
+            Home
+          </Link>
+          <Link to="https:/www.tripleten.com" className="footer__link">
+            TripleTen
+          </Link>
+        </div>
         <div className="footer__weblinks">
           <Link to="https://github.com/Sharrine8" className="footer__weblink">
             <button className="footer__weblink_btn footer__github" />
