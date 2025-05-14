@@ -82,3 +82,29 @@
     font-size: 30px;
   }
 }
+
+@media (max-width: 430px) {
+  .header__home {
+    min-height: 536px;
+  }
+  .header__title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .header__subtitle {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 122px;
+  }
+  .header__container_type_home {
+    padding: 30px 16px;
+  }
+
+  .header__container_type_saved-news {
+    padding: 16px;
+  }
+
+  .header__saved-news-title {
+    font-size: 12px;
+  }
+}

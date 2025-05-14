@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 104px;
+  box-sizing: border-box;
 }
 
 .footer__info {
@@ -71,6 +72,7 @@
     padding: 16px 16px;
     flex-direction: column-reverse;
     align-items: normal;
+    min-height: 176px;
   }
 
   .footer__links {

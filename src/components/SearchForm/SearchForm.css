@@ -49,3 +49,14 @@
 .search-form__btn:active {
   background-color: #2a65cc;
 }
+
+@media (max-width: 430px) {
+  .search-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .search-form__btn {
+    position: relative;
+  }
+}
