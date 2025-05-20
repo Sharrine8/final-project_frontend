@@ -11,11 +11,20 @@ function NewsCardList({
   onSave,
   onDelete,
   savedNews,
+  searchTerm,
+  savedArticles,
 }) {
   const { pathname } = useLocation();
+  const showCardsSection =
+    searchTerm !== "" ||
+    articles.length > 0 ||
+    (pathname === "/saved-news" && savedNews.length > 0);
 
-  return (
+  return showCardsSection ? (
     <section className="cards">
+      {pathname === "/" ? (
+        <h2 className="cards__title">Search results</h2>
+      ) : null}
       {pathname === "/saved-news" ? (
         <ul className="cards__list">
           {savedNews.slice(0, articlesToShow).map((article, index) => {
@@ -44,6 +53,7 @@ function NewsCardList({
                 isLoggedIn={isLoggedIn}
                 onSave={onSave}
                 onDelete={onDelete}
+                savedArticles={savedArticles}
               />
             );
           })}
@@ -56,7 +66,7 @@ function NewsCardList({
         </button>
       ) : null}
     </section>
-  );
+  ) : null;
 }
 
 export default NewsCardList;

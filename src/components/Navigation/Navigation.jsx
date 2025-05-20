@@ -10,14 +10,14 @@ function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
   const isHome = pathname === "/";
   const currentUser = useContext(CurrentUserContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 430);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 570);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const isWhite = isHome || (menuOpen && isMobile);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 430);
+      setIsMobile(window.innerWidth < 570);
     };
 
     window.addEventListener("resize", handleResize);
@@ -115,9 +115,7 @@ function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
                 onLogout();
               }}
               className={`nav__link nav__btn ${
-                isWhite
-                  ? "nav__btn_logged-in_white"
-                  : "nav__btn_logged-in_black"
+                isWhite ? "nav__btn_type_white" : "nav__btn_type_black"
               }`}
             >
               {currentUser.name}
@@ -128,7 +126,9 @@ function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
             </button>
           ) : (
             <button
-              className="nav__link nav__btn"
+              className={`nav__link nav__btn ${
+                isWhite ? "nav__btn_type_white" : "nav__btn_type_black"
+              }`}
               type="button"
               onClick={() => {
                 setMenuOpen(false);

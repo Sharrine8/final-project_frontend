@@ -51,7 +51,7 @@
 }
 
 .footer__github {
-  background: transparent url("../../assets/github-logo.png") center no-repeat;
+  background: transparent url("../../assets/github-logo.svg") center no-repeat;
   background-size: cover;
 }
 
@@ -67,12 +67,16 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 550px) {
   .footer {
     padding: 16px 16px;
     flex-direction: column-reverse;
     align-items: normal;
     min-height: 176px;
+  }
+
+  .footer__links-container {
+    justify-content: space-between;
   }
 
   .footer__links {

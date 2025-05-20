@@ -11,6 +11,8 @@ function LoginModal({
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const isFormValid = email && password;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -28,6 +30,7 @@ function LoginModal({
       switchText={"or Sign up"}
       buttonText={"Sign in"}
       onSubmit={handleSubmit}
+      isSubmitDisabled={!isFormValid}
     >
       <label htmlFor="email" className="modal__label">
         Email{" "}

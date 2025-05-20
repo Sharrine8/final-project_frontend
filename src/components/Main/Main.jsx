@@ -15,6 +15,7 @@ function Main({
   onSave,
   onDelete,
   savedNews,
+  savedArticles,
 }) {
   const [articlesToShow, setArticlesToShow] = useState(3);
   const { pathname } = useLocation();
@@ -38,6 +39,7 @@ function Main({
           onSave={onSave}
           onDelete={onDelete}
           savedNews={savedNews}
+          savedArticles={savedArticles}
         />
       )}
       {pathname === "/" ? <About /> : ""}

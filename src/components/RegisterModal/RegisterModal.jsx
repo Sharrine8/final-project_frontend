@@ -12,6 +12,8 @@ function RegisterModal({
   const [error, setError] = useState("");
   const [name, setName] = useState("");
 
+  const isFormValid = email && password && name;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password || !name) {
@@ -29,6 +31,7 @@ function RegisterModal({
       switchText={"or Sign in"}
       buttonText={"Sign up"}
       onSubmit={handleSubmit}
+      isSubmitDisabled={!isFormValid}
     >
       <label htmlFor="email" className="modal__label">
         Email{" "}

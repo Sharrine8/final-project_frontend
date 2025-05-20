@@ -10,6 +10,7 @@ function ModalWithForm({
   switchText,
   buttonText,
   onSubmit,
+  isSubmitDisabled,
 }) {
   useEffect(() => {
     const handleEscapeKey = (e) => {
@@ -47,7 +48,11 @@ function ModalWithForm({
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
           <div className="modal__form-btns">
-            <button type="submit" className="modal__submit">
+            <button
+              type="submit"
+              className="modal__submit"
+              disabled={isSubmitDisabled}
+            >
               {buttonText}
             </button>
             <button

@@ -36,7 +36,7 @@
   position: absolute;
   top: -46px;
   right: -46px;
-  background: transparent url("../../assets/close-btn.png") no-repeat;
+  background: transparent url("../../assets/close-btn.svg") no-repeat;
   height: 40px;
   width: 40px;
   border: none;
@@ -80,8 +80,14 @@
   background-color: #347eff;
 }
 
-.modal__submit__btn:active {
+.modal__submit:active {
   background-color: #2a65cc;
+}
+
+.modal__submit:disabled {
+  cursor: none;
+  background-color: #e6e8eb;
+  color: #b6bcbf;
 }
 
 .modal__switch-btn {

@@ -1,11 +1,10 @@
-// import img from "../../assets/search_background.png";
 import img from "../../assets/author.jpeg";
 import "./About.css";
 
 function About() {
   return (
     <section className="about">
-      <img className="about__img" src={img} />
+      <img className="about__img" src={img} alt="Photo of Author" />
       <div className="about__info">
         <h2 className="about__title">About the author</h2>
         <p className="about__text">

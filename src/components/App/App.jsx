@@ -189,6 +189,7 @@ function App() {
                     isLoading={isLoading}
                     onSave={handleSaveArticle}
                     onDelete={handleDeleteArticle}
+                    savedArticles={savedArticles}
                   />
                 </>
               }

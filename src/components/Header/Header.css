@@ -83,7 +83,7 @@
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 550px) {
   .header__home {
     min-height: 536px;
   }

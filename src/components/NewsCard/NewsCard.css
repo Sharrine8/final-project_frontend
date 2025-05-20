@@ -1,5 +1,5 @@
 .news-card {
-  max-width: 400px;
+  width: 400px;
   height: 576px;
   border-radius: 10px;
   background-color: #fff;
@@ -131,25 +131,30 @@
 }
 
 .news-card__bookmark {
-  background: #fff url("../../assets/bookmark.png") center no-repeat;
+  background: #fff url("../../assets/bookmark.svg") center no-repeat;
+}
+
+.news-card__bookmark-saved {
+  background: #fff url("../../assets/bookmark-saved.svg") center no-repeat;
 }
 
 .news-card__bookmark:hover {
-  background-image: url("../../assets/bookmark-hover.png");
+  background: #fff url("../../assets/bookmark-hover.svg") center no-repeat;
 }
 
 .news-card__delete {
-  background: #fff url("../../assets/trash.png") center no-repeat;
+  background: #fff url("../../assets/trash.svg") center no-repeat;
 }
 
 .news-card__delete:hover {
-  background-image: url("../../assets/trash-hover.png");
+  background-image: url("../../assets/trash-hover.svg");
 }
 
 @media (max-width: 768px) {
   .news-card {
-    max-width: 224px;
+    width: 224px;
     max-height: 420px;
+    box-sizing: border-box;
   }
 
   .news-card__img {

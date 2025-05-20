@@ -3,11 +3,19 @@ import "./NewsCard.css";
 import { Link, useLocation } from "react-router-dom";
 import backup_img from "../../assets/search_background.png";
 
-function NewsCard({ article, category, isLoggedIn, onSave, onDelete }) {
+function NewsCard({
+  article,
+  category,
+  isLoggedIn,
+  onSave,
+  onDelete,
+  savedArticles,
+}) {
   const { title, description, url, urlToImage, source, publishedAt } = article;
   const { pathname } = useLocation();
   const categoryUppercase =
     category.charAt(0).toUpperCase() + category.slice(1);
+  const isSaved = savedArticles?.some((saved) => saved.url === article.url);
 
   return (
     <li className="news-card">
@@ -27,7 +35,9 @@ function NewsCard({ article, category, isLoggedIn, onSave, onDelete }) {
       ) : pathname === "/" && isLoggedIn ? (
         <div className="news-card__btn-container">
           <button
-            className="news-card__btn news-card__bookmark"
+            className={`news-card__btn ${
+              isSaved ? "news-card__bookmark-saved" : "news-card__bookmark"
+            } `}
             type="button"
             onClick={() => onSave(article)}
           />
