@@ -8,7 +8,7 @@ A responsive web application that allows users to search for news articles, save
 - Responsive and accessible UI
 - Save and manage favorite articles (with login)
 - Keyword highlighting and filtering
-- Deployed to GitHub Pages
+- [Deployed to GitHub Pages -- Click to see!](https://sharrine8.github.io/final-project_frontend/)
 
 ## 🛠 Tech Stack
 
@@ -21,7 +21,9 @@ A responsive web application that allows users to search for news articles, save
 
 ## 📸 Preview
 
-[![deployed site](./src/assets/favicon.svg)](https://sharrine8.github.io/final-project_frontend/) <!-- Optional: Add your screenshot or GIF -->
+![deployed site](https://sharrine8.github.io/final-project_frontend/)
+
+- About the Author![Picture of page](https://github.com/Sharrine8/final-project_frontend/blob/main/src/assets/header-preview.png)
 
 ---
 

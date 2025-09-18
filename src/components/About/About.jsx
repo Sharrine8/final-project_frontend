@@ -17,6 +17,16 @@ function About() {
           like Postman for API testing and Figma for designing intuitive user
           interfaces.
           <br />
+          I’ve always loved languages and speak four of them. Along the way, I
+          discovered a love for problem-solving — whether tackling puzzles,
+          escape rooms, or finding practical solutions at home and work.
+          <br />
+          Software engineering felt like the right path, where my curiosity,
+          skills, and desire to make an impact come together. After exploring
+          different directions in life, I left my teaching career to pursue this
+          field, embracing a challenge that excites me and lets me do work I
+          genuinely enjoy.
+          <br />
           With a solid foundation in full-stack development, I am eager to
           contribute to impactful projects and further refine my technical and
           collaborative skills.
