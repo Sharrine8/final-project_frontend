@@ -34,6 +34,15 @@ Built with **React** and **Vite**, currently using a **mock backend**, and deplo
 
 ---
 
+## 📸 Preview
+
+- Header![Picture of page](https://github.com/Sharrine8/final-project_frontend/blob/main/src/assets/header-preview.png)
+- About the Author![Picture of page](https://github.com/Sharrine8/final-project_frontend/blob/main/src/assets/about.png)
+- Search example![Picture of page](https://github.com/Sharrine8/final-project_frontend/blob/main/src/assets/search-results.png)
+- Logged in -- Saved articles![Picture of page](https://github.com/Sharrine8/final-project_frontend/blob/main/src/assets/saved-example.png)
+
+---
+
 ## 📦 Installation & Local Setup
 
 Clone the repo:
