@@ -21,7 +21,7 @@ A responsive web application that allows users to search for news articles, save
 
 ## 📸 Preview
 
-![deployed site](https://sharrine8.github.io/final-project_frontend/) <!-- Optional: Add your screenshot or GIF -->
+[![deployed site](./src/assets/favicon.svg)](https://sharrine8.github.io/final-project_frontend/) <!-- Optional: Add your screenshot or GIF -->
 
 ---
 
