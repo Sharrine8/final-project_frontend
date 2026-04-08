@@ -1,77 +1,151 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useLocation } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./NewsCard.css";
-import { Link, useLocation } from "react-router-dom";
 import backup_img from "../../assets/search_background.png";
 
-function NewsCard({
-  article,
-  category,
-  isLoggedIn,
-  onSave,
-  onDelete,
-  savedArticles,
-}) {
-  const { title, description, url, urlToImage, source, publishedAt } = article;
+function NewsCard({ article, onSave, onDelete }) {
+  const { savedArticles } = useContext(CurrentUserContext);
   const { pathname } = useLocation();
-  const categoryUppercase =
-    category.charAt(0).toUpperCase() + category.slice(1);
-  const isSaved = savedArticles?.some((saved) => saved.url === article.url);
+
+  const isSaved = savedArticles?.some((a) => a.url === article.url);
+
+  const handleBookmarkClick = () => {
+    if (isSaved) {
+      onDelete(article._id); // remove from backend
+    } else {
+      onSave(article); // save to backend
+    }
+  };
 
   return (
     <li className="news-card">
-      <p className="news-card__category">
-        {category ? categoryUppercase : "Top match"}
-      </p>
-      {pathname === "/" && !isLoggedIn ? (
+      <p className="news-card__category">{article.keyword || "Top match"}</p>
+
+      {pathname === "/" && (
         <div className="news-card__btn-container">
           <button
-            className="news-card__btn news-card__bookmark"
+            className={`news-card__btn ${isSaved ? "news-card__bookmark-saved" : "news-card__bookmark"}`}
             type="button"
-          />
-          <div className="news-card__bookmark-overlay">
-            Sign in to save articles
-          </div>
-        </div>
-      ) : pathname === "/" && isLoggedIn ? (
-        <div className="news-card__btn-container">
-          <button
-            className={`news-card__btn ${
-              isSaved ? "news-card__bookmark-saved" : "news-card__bookmark"
-            } `}
-            type="button"
-            onClick={() => onSave(article)}
-          />
-        </div>
-      ) : (
-        <div className="news-card__btn-container">
-          <button
-            onClick={() => onDelete(article.id)}
-            className="news-card__btn news-card__delete"
-            type="button"
+            onClick={handleBookmarkClick}
           />
         </div>
       )}
+
+      {pathname === "/saved-news" && (
+        <div className="news-card__btn-container">
+          <button
+            className="news-card__btn news-card__delete"
+            type="button"
+            onClick={() => onDelete(article._id)}
+          />
+        </div>
+      )}
+
       <img
-        src={urlToImage ? urlToImage : backup_img}
-        alt={title}
+        src={article.urlToImage || backup_img}
+        alt={article.title}
         className="news-card__img"
       />
       <div className="news-card__info">
         <p className="news-card__date">
-          {new Date(publishedAt).toLocaleDateString("en-US", {
+          {new Date(article.publishedAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
           })}
         </p>
-        <Link to={url} className="news-card__title">
-          {title}
-        </Link>
-        <p className="news-card__description">{description}</p>
-        <p className="news-card__source">{source?.name}</p>
+        <a
+          href={article.url}
+          className="news-card__title"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {article.title}
+        </a>
+        <p className="news-card__description">{article.description}</p>
+        <p className="news-card__source">{article.source?.name}</p>
       </div>
     </li>
   );
 }
 
 export default NewsCard;
+
+// import React from "react";
+// import "./NewsCard.css";
+// import { Link, useLocation } from "react-router-dom";
+// import backup_img from "../../assets/search_background.png";
+
+// function NewsCard({
+//   article,
+//   category,
+//   isLoggedIn,
+//   onSave,
+//   onDelete,
+//   savedArticles,
+// }) {
+//   const { title, description, url, urlToImage, source, publishedAt } = article;
+//   const { pathname } = useLocation();
+//   const categoryUppercase =
+//     category.charAt(0).toUpperCase() + category.slice(1);
+//   const isSaved = savedArticles?.some((saved) => saved.url === article.url);
+
+//   return (
+//     <li className="news-card">
+//       <p className="news-card__category">
+//         {category ? categoryUppercase : "Top match"}
+//       </p>
+//       {pathname === "/" && !isLoggedIn ? (
+//         <div className="news-card__btn-container">
+//           <button
+//             className="news-card__btn news-card__bookmark"
+//             type="button"
+//           />
+//           <div className="news-card__bookmark-overlay">
+//             Sign in to save articles
+//           </div>
+//         </div>
+//       ) : pathname === "/" && isLoggedIn ? (
+//         <div className="news-card__btn-container">
+//           <button
+//             className={`news-card__btn ${
+//               isSaved ? "news-card__bookmark-saved" : "news-card__bookmark"
+//             } `}
+//             type="button"
+//             onClick={() => onSave(article)}
+//           />
+//         </div>
+//       ) : (
+//         <div className="news-card__btn-container">
+//           <button
+//             onClick={() => onDelete(article.id)}
+//             className="news-card__btn news-card__delete"
+//             type="button"
+//           />
+//         </div>
+//       )}
+//       <img
+//         src={urlToImage ? urlToImage : backup_img}
+//         alt={title}
+//         className="news-card__img"
+//       />
+//       <div className="news-card__info">
+//         <p className="news-card__date">
+//           {new Date(publishedAt).toLocaleDateString("en-US", {
+//             year: "numeric",
+//             month: "long",
+//             day: "numeric",
+//           })}
+//         </p>
+//         <Link to={url} className="news-card__title">
+//           {title}
+//         </Link>
+//         <p className="news-card__description">{description}</p>
+//         <p className="news-card__source">{source?.name}</p>
+//       </div>
+//     </li>
+//   );
+// }
+
+// export default NewsCard;
