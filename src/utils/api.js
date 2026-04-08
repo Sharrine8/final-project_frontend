@@ -1,19 +1,19 @@
-// api.js
+// utils/api.js
 const API_KEY = "0af95d023d7e405d8f25417590c9f6de";
 const BASE_URL = "https://newsapi.org/v2";
-const BACKEND_URL = "http://localhost:3000"; // adjust if deployed
+const BACKEND_URL = "http://localhost:3000"; // backend
 
 const headers = {
   "Content-Type": "application/json",
 };
 
 // Generic check response
-export function checkResponse(res) {
+function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
 // Generic fetch request
-export function request(url, options) {
+function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
@@ -29,21 +29,30 @@ export function getEverything(query) {
 
   return request(proxyUrl, {
     method: "GET",
-    headers: headers,
+    headers,
   });
 }
 
 // --- Backend: User auth ---
-// Signin
-export function authorize(email, password) {
+// Register (signup)
+export function createUser({ email, password, name }) {
+  return request(`${BACKEND_URL}/users/signup`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ email, password, name }),
+  });
+}
+
+// Login (signin)
+export function loginUser(email, password) {
   return request(`${BACKEND_URL}/users/signin`, {
     method: "POST",
-    headers: headers,
+    headers,
     body: JSON.stringify({ email, password }),
   });
 }
 
-// Check JWT token and get current user
+// Check JWT token / get current user
 export function checkToken(token) {
   return request(`${BACKEND_URL}/users/me`, {
     method: "GET",

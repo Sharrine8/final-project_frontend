@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom"; //instead of BrowserRouter when deploying with Vite
-import App from "./components/App/App.jsx";
+import App from "./components/App/App";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -9,5 +9,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <HashRouter>
       <App />
     </HashRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
