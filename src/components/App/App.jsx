@@ -11,7 +11,7 @@ import {
   saveArticle as saveArticleAPI,
   deleteArticle as deleteArticleAPI,
 } from "../../utils/api";
-import { login as loginUser, createUser } from "../../utils/api";
+import { loginUser, createUser } from "../../utils/api";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./App.css";
