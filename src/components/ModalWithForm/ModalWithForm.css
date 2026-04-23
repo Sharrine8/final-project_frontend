@@ -85,7 +85,7 @@
 }
 
 .modal__submit:disabled {
-  cursor: none;
+  cursor: default;
   background-color: #e6e8eb;
   color: #b6bcbf;
 }

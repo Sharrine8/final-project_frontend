@@ -8,7 +8,7 @@ import "./Navigation.css";
 function Navigation({ isLoggedIn, openLoginModal, onLogout }) {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
-  const currentUser = useContext(CurrentUserContext); // USE CONTEXT
+  const { currentUser } = useContext(CurrentUserContext); // USE CONTEXT
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 570);

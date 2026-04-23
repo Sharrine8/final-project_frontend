@@ -1,9 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { authorize } from "../../utils/auth";
 
-function LoginModal({ isOpen, closeActiveModal, switchLoginModal }) {
+function LoginModal({
+  isOpen,
+  closeActiveModal,
+  switchLoginModal,
+  handleLoginSubmit,
+}) {
   const { setCurrentUser, setIsLoggedIn } = useContext(CurrentUserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,15 +15,16 @@ function LoginModal({ isOpen, closeActiveModal, switchLoginModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    authorize(email, password)
-      .then((res) => {
-        localStorage.setItem("token", res.token);
-        setCurrentUser({ name: res.user.name, email: res.user.email });
-        setIsLoggedIn(true);
-        closeActiveModal();
-      })
-      .catch((err) => setError("Login failed: " + err));
+    handleLoginSubmit({ email, password });
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setEmail("");
+      setPassword("");
+      setError("");
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm
@@ -32,20 +37,28 @@ function LoginModal({ isOpen, closeActiveModal, switchLoginModal }) {
       onSubmit={handleSubmit}
       isSubmitDisabled={!email || !password}
     >
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+      <label htmlFor="email" className="modal__label">
+        Email{" "}
+        <input
+          type="email"
+          placeholder="Enter email"
+          className="modal__input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </label>
+      <label htmlFor="password" className="modal__label">
+        Password{" "}
+        <input
+          type="password"
+          placeholder="Enter password"
+          className="modal__input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </label>
       {error && <p className="modal__error">{error}</p>}
     </ModalWithForm>
   );

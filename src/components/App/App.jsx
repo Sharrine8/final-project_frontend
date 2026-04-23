@@ -11,7 +11,6 @@ import {
   saveArticle as saveArticleAPI,
   deleteArticle as deleteArticleAPI,
 } from "../../utils/api";
-import { loginUser, createUser } from "../../utils/api";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./App.css";
@@ -33,10 +32,18 @@ function App() {
 
   // REGISTER
   const onRegister = ({ email, password, name }) => {
-    createUser({ email, password, name })
+    fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password, name }),
+    })
       .then((res) => {
-        localStorage.setItem("token", res.token);
-        setCurrentUser({ name: res.user.name, email: res.user.email });
+        if (!res.ok) throw new Error("Registration failed");
+        return res.json();
+      })
+      .then((user) => {
+        setCurrentUser({ name: user.name, email: user.email });
         setIsLoggedIn(true);
         closeActiveModal();
       })
@@ -45,22 +52,32 @@ function App() {
 
   // LOGIN
   const handleLogin = ({ email, password }) => {
-    loginUser(email, password)
+    fetch("/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
+    })
       .then((res) => {
-        localStorage.setItem("token", res.token);
-        setCurrentUser({ name: res.user.name, email: res.user.email });
+        if (!res.ok) throw new Error("Login failed");
+        return res.json();
+      })
+      .then((user) => {
+        setCurrentUser({ name: user.name, email: user.email });
         setIsLoggedIn(true);
         closeActiveModal();
       })
       .catch((err) => setError(err.message));
   };
 
+  // LOGOUT
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setCurrentUser({ name: "", email: "" });
-    setIsLoggedIn(false);
-    setSavedArticles([]);
-    closeActiveModal();
+    fetch("/logout", { method: "POST", credentials: "include" }).finally(() => {
+      setCurrentUser({ name: "", email: "" });
+      setIsLoggedIn(false);
+      setSavedArticles([]);
+      closeActiveModal();
+    });
   };
 
   // Save/Delete articles
@@ -106,12 +123,21 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  // Load token/user info on mount
+  // Load user on mount
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    setIsLoggedIn(true);
-    // Optional: verify token via backend and set currentUser
+    fetch("/users/me", { credentials: "include" })
+      .then((res) => {
+        if (!res.ok) throw new Error("Not logged in");
+        return res.json();
+      })
+      .then((user) => {
+        setCurrentUser({ name: user.name, email: user.email });
+        setIsLoggedIn(true);
+      })
+      .catch(() => {
+        setCurrentUser({ name: "", email: "" });
+        setIsLoggedIn(false);
+      });
   }, []);
 
   return (
@@ -184,7 +210,6 @@ function App() {
 }
 
 export default App;
-
 // import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 // import Main from "../Main/Main";
 // import Header from "../Header/Header";

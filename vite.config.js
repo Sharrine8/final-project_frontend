@@ -6,6 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    proxy: {
+      "/articles": "http://localhost:3001",
+      "/users": "http://localhost:3001",
+      "/me": "http://localhost:3001",
+    },
   },
   base: "/",
 });

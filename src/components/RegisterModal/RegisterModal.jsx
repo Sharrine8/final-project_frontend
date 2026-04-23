@@ -1,5 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { createUser } from "../../utils/api";
 
@@ -25,8 +25,17 @@ function RegisterModal({ closeActiveModal, isOpen, switchRegisterModal }) {
         setCurrentUser({ name: res.user.name, email: res.user.email });
         closeActiveModal();
       })
-      .catch((err) => setError(err.message || "Registration failed"));
+      .catch((err) => setError(err.message || "Email already in use"));
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setEmail("");
+      setPassword("");
+      setName("");
+      setError("");
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm
